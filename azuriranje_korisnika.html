@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="apitoken" content="XGFLJVwBQYeap56kUPUQoB3ZbUtCStw4Jco6CPg4dUUntSpBa2Fw2aNQfeCixWwNTfx8xTO1p787Wd2Fj4WUwrcJd9">
+  <title>Региструј се</title>
+  <link rel="stylesheet" href="css/azuriranje_korisnika.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+  <script src="js/azuriranje_korisnika.js"></script>
+
+</head>
+<body>
+<h1>Ажурирање података корисника</h1>
+<div id="container_forma">
+  <form action="https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik/" id="forma_azuriranje" method="post">
+
+    <label for="id_korisnika">ID korisnika</label>
+    <input type="text" id="id_korisnika" disabled>
+
+    <label for="ime_prezime">Име и презиме:</label>
+    <input type="text" id="ime_prezime" required>
+    <div id="greska_imePrezime" hidden></div>
+
+    <label for="email">Е-мејл:</label>
+    <input type="text" id="email" required>
+    <div id="greska_email" hidden></div>
+
+    <label for="telefon">Телефон:</label>
+    <input type="text" id="telefon">
+    <div id="greska_telefon" hidden></div>
+
+    <label for="lozinka">Лозинка:</label>
+    <input type="password" id="lozinka" placeholder="Овде унесите лозинку" required>
+    <div id="greska_lozinka" hidden></div>
+
+    <label for="uloga_korisnika">Изаберите улогу корисника:</label>
+    <select name="uloga_korisnika" id="uloga_korisnika">
+      <option value="3" id="registrovaniKorisnik">Регистровани корисник</option>
+      <option value="2" id="blagajnik">Благајник</option>
+      <option value="1" id="administrator">Администратор</option>
+    </select>
+
+    <select name="izaberi_lokaciju" id="izaberi_lokaciju" hidden >
+      <option value="1">Штарк Арена</option>
+      <option value="2">Мадленианум</option>
+      <option value="3">Народно позориште</option>
+    </select>
+
+    <button type="submit">Сними</button>
+    <div id="greska_azuriranje" hidden></div>
+    <div id="uspesno_azuriranje" hidden></div>
+
+  </form>
+</div>
+
+<footer>
+  &copy 2023 All rights reserved Немања Јанковић
+</footer>
+
+</body>
+</html>

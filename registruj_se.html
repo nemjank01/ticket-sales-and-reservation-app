@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apitoken" content="XGFLJVwBQYeap56kUPUQoB3ZbUtCStw4Jco6CPg4dUUntSpBa2Fw2aNQfeCixWwNTfx8xTO1p787Wd2Fj4WUwrcJd9">
+    <title>Региструј се</title>
+    <link rel="stylesheet" href="css/registruj_se.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="js/registruj_se.js"></script>
+
+</head>
+<body>
+    <h1>Региструј се</h1>
+    <div id="container_forma">
+        <form action="https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/register" id="forma_registracija" method="post">
+
+            <label for="ime_prezime">Име и презиме:</label>
+            <input type="text" id="ime_prezime" placeholder="Овде унесите име и презиме" required>
+            <div id="greska_imePrezime" hidden></div>
+
+            <label for="telefon">Телефон:</label>
+            <input type="text" id="telefon" placeholder="Овде унесите број телефона">
+            <div id="greska_telefon" hidden></div>
+
+            <label for="email">Е-мејл:</label>
+            <input type="text" id="email" placeholder="Овде унесите е-мејл адресу" required>
+            <div id="greska_email" hidden></div>
+
+            <label for="lozinka">Лозинка:</label>
+            <input type="password" id="lozinka" placeholder="Овде унесите лозинку" required>
+            <div id="greska_lozinka" hidden></div>
+
+            <label for="ponovljena_lozinka">Понови лозинку:</label>
+            <input type="password" id="ponovljena_lozinka" placeholder="Овде поновите лозинку" required>
+            <div id="greska_ponovljena_lozinka" hidden></div>
+
+            <button type="submit">Региструј се</button>
+            <div id="greska_registracija" hidden></div>
+
+        </form>
+    </div>
+
+    <footer>
+        &copy 2023 All rights reserved Немања Јанковић
+    </footer>
+
+</body>
+</html>

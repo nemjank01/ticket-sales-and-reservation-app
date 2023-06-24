@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="apitoken" content="XGFLJVwBQYeap56kUPUQoB3ZbUtCStw4Jco6CPg4dUUntSpBa2Fw2aNQfeCixWwNTfx8xTO1p787Wd2Fj4WUwrcJd9">
+  <title>Листа свих корисника</title>
+  <link rel="stylesheet" href="css/lista_svih_korisnika.css">
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<!--  <script src="js/izmena_brisanje_korisnika.js"></script>-->
+  <script>
+    $(function(){
+
+      $.ajax({
+        "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik?apitoken=" + $('meta[name="apitoken"]').attr("content"),
+        "method": "GET",
+        "timeout": 0,
+        "headers": {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        "success":function(response){
+          console.log(response);
+          let tabela_sdrzaj = $('#tabela-sadrzaj');
+          response.forEach((elem,index) => {
+            if(elem.lokacija === undefined) {
+              tabela_sdrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.imePrezime + '</td>' +  '<td>' + elem.email +  '</td>'+'<td>' + elem.telefon + '</td>'+ '<td>/</td>' + '<td>' + elem.uloga.naziv + '</td>' + '<td>/</td>' + '<td>/</td>' +
+                      '<td>' + '<button class="izmeni-btn" data-id="' + elem.id + '" data-imePrezime="' + elem.imePrezime + '" data-email="' + elem.email
+                      + '" data-telefon="' + elem.telefon + '" data-ulogaId="' + elem.uloga.id + '"' + '>'
+                      + 'Izmeni' + '</button>' + '<button class="obrisi-btn" data-id="' + elem.id + '" data-imePrezime="'
+                      + elem.imeprezime + '" data-email="' + elem.email +
+                      '" data-telefon="' + elem.telefon + '" data-ulogaId="' + elem.uloga.id + '"' + '>' + 'Obrisi' + '</button>'+ '</td>' +  '</tr>');
+            } else {
+              tabela_sdrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.imePrezime + '</td>' +  '<td>' + elem.email +  '</td>'+'<td>' + elem.telefon + '</td>'+ '<td>' + elem.lokacija.naziv + '</td>' + '<td>' + elem.uloga.naziv + '</td>' + '<td>/</td>' + '<td>/</td>' +
+                      '<td>' + '<button class="izmeni-btn" data-id="' + elem.id + '" data-imePrezime="' + elem.imePrezime + '" data-email="' + elem.email
+                      + '" data-telefon="' + elem.telefon + '" data-ulogaId="' + elem.uloga.id + '"' + '>'
+                      + 'Izmeni' + '</button>' + '<button class="obrisi-btn" data-id="' + elem.id + '" data-imePrezime="'
+                      + elem.imeprezime + '" data-email="' + elem.email +
+                      '" data-telefon="' + elem.telefon + '" data-ulogaId="' + elem.uloga.id + '"' + '>' + 'Obrisi' + '</button>'+ '</td>' +  '</tr>');
+            }
+          });
+
+          //Kod za izmenu i brisanje korisnika. Morao sam ovde da stavim posto ovde samo imam pristup button-ima za izmenu i brisanje
+          let izmeni_btn = $(".izmeni-btn");
+          let obrisi_btn = $(".obrisi-btn");
+
+
+          izmeni_btn.on('click', function (e) {
+            //console.log(e);
+
+            //Kada kliknem dugme izmeni, od servera dobijem podatke od korisnika na kog sam kliknuo
+            $.ajax({
+              "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik/" + $(this).attr('data-id') +"?apitoken=" + $('meta[name="apitoken"]').attr('content'),
+              "method": "GET",
+              "timeout": 0,
+              "headers": {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+              },
+              "success": function (response) {
+                //console.log(response);
+                localStorage.setItem("user_id", response.id);
+                localStorage.setItem("user_name", response.imePrezime);
+                localStorage.setItem("user_email", response.email);
+                localStorage.setItem("user_phone", response.telefon);
+                localStorage.setItem("user_roleID", response.uloga.id);
+
+                window.location = "azuriranje_korisnika.html";
+              },
+              "error": function (response) {
+                console.log(response);
+              }
+            });
+          });
+
+          obrisi_btn.on('click', function (e) {
+            //console.log(e);
+
+            let form = new FormData();
+            // form.append("name", $(this).attr('data-imePrezime'));
+            // form.append("email", $(this).attr('data-email'));
+            // form.append("phone", $(this).attr('data-telefon'));
+            form.append("id", $(this).attr('data-id'));
+            form.append("apitoken", $('meta[name="apitoken"]').attr('content'));
+
+            $.ajax({
+              "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik/" + $(this).attr('data-id') +"?apitoken=" + $('meta[name="apitoken"]').attr('content'),
+              "method": "DELETE",
+              "timeout": 0,
+              "headers": {
+                "Accept": "application/json",
+                "Authorization": "Bearer " + localStorage.getItem("token")
+              },
+              "processData": false,
+              "mimeType": "multipart/form-data",
+              "contentType": false,
+              "dataType":"json",
+              "data": form,
+              "success": function (response) {
+                console.log(response);
+                alert(response.success);
+              },
+              "error": function (response) {
+                console.log(response);
+              }
+            });
+          });
+        },
+        "error":function(response){
+          console.log(response);
+        }
+      });
+
+
+    });
+  </script>
+</head>
+<body>
+<header>
+  <h1>Листа свих корисника</h1>
+</header>
+
+<main>
+  <table id="tabela">
+    <thead id="zaglavlje">
+    <th>ID</th>
+    <th>Име и презиме</th>
+    <th>Имејл</th>
+    <th>Телефон</th>
+    <th>Локација</th>
+    <th>Улога</th>
+    <th>Догађаји</th>
+    <th>Улазнице</th>
+    <th>Акција</th>
+    </thead>
+    <tbody id="tabela-sadrzaj">
+
+    </tbody>
+  </table>
+</main>
+
+<footer>
+  &copy 2023 All rights reserved Немања Јанковић
+</footer>
+</body>
+</html>

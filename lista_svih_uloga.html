@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apitoken" content="XGFLJVwBQYeap56kUPUQoB3ZbUtCStw4Jco6CPg4dUUntSpBa2Fw2aNQfeCixWwNTfx8xTO1p787Wd2Fj4WUwrcJd9">
+    <title>Листа свих улога корисника</title>
+    <link rel="stylesheet" href="css/lista_svih_uloga.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+<!--    <script src="js/lista_uloga_korisnika.js"></script>-->
+    <script>
+        $(function (){
+
+            $.ajax({
+                "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik?apitoken=" + $('meta[name="apitoken"]').attr("content"),
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer " + localStorage.getItem("token")
+                },
+                "success":function(response){
+                    //console.log(response);
+                    let br_administratora = 0;
+                    let br_blagajnika = 0;
+                    let br_reg_korisnika = 0;
+                    let br_blokiranih_korisnika = 0;
+
+                    response.forEach((elem,index) => {
+                        if(elem.uloga.naziv === 'администратор') br_administratora++;
+                        else if (elem.uloga.naziv === 'благајник') br_blagajnika++;
+                        else if (elem.uloga.naziv === 'регистровани корисник') br_reg_korisnika++;
+                        else br_blokiranih_korisnika++;
+                    });
+
+                    $.ajax({
+                        "url" : "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/uloga?apitoken=" + $('meta[name="apitoken"]').attr("content"),
+                        "method": "GET",
+                        "timeout": 0,
+                        "headers": {
+                            "Accept": "application/json",
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        },
+                        "success": function(response) {
+                            let tabela_sadrzaj = $('#tabela-sadrzaj');
+                            console.log(response);
+                            response.forEach((elem,index) => {
+                                if(elem.naziv === 'администратор') {
+                                    tabela_sadrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.naziv + '</td>' +  '<td>' + elem.opis +  '</td>'+ '<td>' + br_administratora +'</td>'+'</tr>');
+                                } else if(elem.naziv === 'благајник') {
+                                    tabela_sadrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.naziv + '</td>' +  '<td>' + elem.opis +  '</td>'+ '<td>' + br_blagajnika +'</td>'+'</tr>');
+                                } else if(elem.naziv === 'регистровани корисник') {
+                                    tabela_sadrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.naziv + '</td>' +  '<td>' + elem.opis +  '</td>'+ '<td>' + br_reg_korisnika +'</td>'+'</tr>');
+                                } else {
+                                    tabela_sadrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.naziv + '</td>' +  '<td>' + elem.opis +  '</td>'+ '<td>' + br_blokiranih_korisnika +'</td>'+'</tr>');
+                                }
+
+                            });
+                        },
+                        "error": function(response) {
+                            console.log(response);
+                        }
+                    });
+                },
+                "error":function(response){
+                    console.log(response);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<header>
+    <h1>Листа свих улога корисника</h1>
+</header>
+
+<main>
+    <table id="tabela">
+        <thead id="zaglavlje">
+            <th>ID</th>
+            <th>Назив</th>
+            <th>Опис</th>
+            <th>Број корисника</th>
+        </thead>
+        <tbody id="tabela-sadrzaj">
+
+        </tbody>
+    </table>
+</main>
+
+<footer>
+    &copy 2023 All rights reserved Немања Јанковић
+</footer>
+</body>
+</html>
