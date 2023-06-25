@@ -146,7 +146,6 @@ $(function () {
        e.preventDefault();
 
        //Ovde sad ide ajax za dodavanje lokacije
-
         $.ajax({
             "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/lokacija",
             "method": "POST",

@@ -61,6 +61,26 @@ $(function () {
       }
    });
 
+   //Ovaj ajax izvlaci sve lokacije sa servera i ubacuje u izbor korisnika ako izabereulogu blagajnik
+   $.ajax({
+      "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/lokacija?apitoken=" + $('meta[name="apitoken"]').attr("content"),
+      "method": "GET",
+      "timeout": 0,
+      "headers": {
+         "Accept": "application/json",
+         "Authorization": "Bearer " +localStorage.getItem("token")
+      },
+      "success": function (response) {
+         //console.log(response);
+         response.forEach((elem,index) => {
+            $('#izaberi_lokaciju').append('<option value="' + elem.id + '"> ' + elem.naziv + ' </option>>');
+         })
+      },
+      "error": function (response) {
+         console.log(response);
+      }
+   });
+
    let forma_azuriranje = $("#forma_azuriranje");
    forma_azuriranje.on("submit", function (e) {
       e.preventDefault();
