@@ -9,7 +9,6 @@
 <!--    <script src="js/lista_uloga_korisnika.js"></script>-->
     <script>
         $(function (){
-
             $.ajax({
                 "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/korisnik?apitoken=" + $('meta[name="apitoken"]').attr("content"),
                 "method": "GET",

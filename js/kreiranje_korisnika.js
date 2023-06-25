@@ -70,7 +70,6 @@ $(function() {
     });
 
 
-
     $('#forma_kreiranje_korisnika').on('submit', function(e) {
         e.preventDefault();
 

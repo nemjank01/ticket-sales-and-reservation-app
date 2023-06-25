@@ -51,7 +51,13 @@ $(function () {
          $(this).css("outline", "solid 5px #D95714FF");
          greska_lozinka.show();
          greska_lozinka.html("Лозинка није довољно јака").css('color', '#D95714FF');
-
+      }
+   });
+   $('#uloga_korisnika').on('change', function (e) {
+      if($('#uloga_korisnika').val() === "2"){
+         $('#izaberi_lokaciju').show();
+      } else {
+         $('#izaberi_lokaciju').hide();
       }
    });
 
