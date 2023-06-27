@@ -61,7 +61,7 @@ $(function () {
       }
    });
 
-   //Ovaj ajax izvlaci sve lokacije sa servera i ubacuje u izbor korisnika ako izabereulogu blagajnik
+   //Ovaj ajax izvlaci sve lokacije sa servera i ubacuje u izbor korisnika ako izabere ulogu blagajnik
    $.ajax({
       "url": "https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/lokacija?apitoken=" + $('meta[name="apitoken"]').attr("content"),
       "method": "GET",

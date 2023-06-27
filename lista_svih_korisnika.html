@@ -23,7 +23,7 @@
           response.forEach((elem,index) => {
             if(elem.lokacija === undefined) {
               tabela_sdrzaj.append('<tr>' +'<td>' + elem.id + '</td>' +  '<td>' + elem.imePrezime + '</td>' +  '<td>' + elem.email +  '</td>'+'<td>' + elem.telefon + '</td>'+ '<td>/</td>' + '<td>' + elem.uloga.naziv + '</td>' + '<td>/</td>' + '<td>/</td>' +
-                      '<td>' + '<button class="izmeni-btn" data-id="' + elem.id + '" data-imePrezime="' + elem.imePrezime + '" data-email="' + elem.email
+                        '<td>' + '<button class="izmeni-btn" data-id="' + elem.id + '" data-imePrezime="' + elem.imePrezime + '" data-email="' + elem.email
                       + '" data-telefon="' + elem.telefon + '" data-ulogaId="' + elem.uloga.id + '"' + '>'
                       + 'Izmeni' + '</button>' + '<button class="obrisi-btn" data-id="' + elem.id + '" data-imePrezime="'
                       + elem.imeprezime + '" data-email="' + elem.email +

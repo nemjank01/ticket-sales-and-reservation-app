@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apitoken" content="XGFLJVwBQYeap56kUPUQoB3ZbUtCStw4Jco6CPg4dUUntSpBa2Fw2aNQfeCixWwNTfx8xTO1p787Wd2Fj4WUwrcJd9">
+    <title>Ажурирање података локације</title>
+    <link rel="stylesheet" href="css/azuriranje_lokacije.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="js/azuriranje_lokacije.js"></script>
+
+</head>
+<body>
+<h1>Ажурирање података локације</h1>
+<div id="container_forma">
+    <form action="https://vsis.mef.edu.rs/projekat/ulaznice/public_html/api/lokacija/" id="forma_azuriranje" method="post">
+
+        <label for="naziv_lokacije">Назив локације:</label>
+        <input type="text" id="naziv_lokacije" required>
+
+        <label for="adresa">Адреса локације:</label>
+        <input type="text" id="adresa"  required>
+
+        <label for="grad">Град:</label>
+        <input type="text" id="grad" required>
+
+        <label for="opis">Опис:</label>
+        <textarea id="opis"></textarea>
+
+        <div id="vreme">
+
+            <div class="dan">
+                <input type="text" id="ponedeljak" hidden value="1">
+                <input type="text" id="dan_1" disabled placeholder="Понедељак">
+                <input type="number" id="sati_od_pon" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_pon" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_pon" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_pon" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+            <div class="dan">
+                <input type="text" id="utorak" hidden value="2">
+                <input type="text" id="dan_2" disabled placeholder="Уторак">
+                <input type="number" id="sati_od_uto" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_uto" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_uto" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_uto" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+            <div class="dan">
+                <input type="text" id="sreda" hidden value="3">
+                <input type="text" id="dan_3" disabled placeholder="Среда">
+                <input type="number" id="sati_od_sre" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_sre" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_sre" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_sre" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+            <div class="dan">
+                <input type="text" id="cetvrtak" hidden value="4">
+                <input type="text" id="dan_4" disabled placeholder="Четвртак">
+                <input type="number" id="sati_od_cet" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_cet" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_cet" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_cet" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+
+            <div class="dan">
+                <input type="text" id="petak" hidden value="5">
+                <input type="text" id="dan_5" disabled placeholder="Петак">
+                <input type="number" id="sati_od_pet" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_pet" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_pet" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_pet" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+            <div class="dan">
+                <input type="text" id="subota" hidden value="6">
+                <input type="text" id="dan_6" disabled placeholder="Субота">
+                <input type="number" id="sati_od_sub" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_sub" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_sub" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_sub" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+            <div class="dan">
+                <input type="text" id="nedelja" hidden value="7">
+                <input type="text" id="dan_7" disabled placeholder="Недеља">
+                <input type="number" id="sati_od_ned" min="0" max="24" placeholder="Сати од">
+                <input type="number" id="minuti_od_ned" min="0" max="59" placeholder="Минути од">
+                <input type="number" id="sati_do_ned" min="0" max="24"  placeholder="Сати до">
+                <input type="number" id="minuti_do_ned" min="0" max="59"  placeholder="Минути до">
+            </div>
+
+        </div>
+
+        <button type="submit">Сними</button>
+        <div id="greska_azuriranje" hidden></div>
+        <div id="uspesno_azuriranje" hidden></div>
+
+    </form>
+</div>
+
+<footer>
+    &copy 2023 All rights reserved Немања Јанковић
+</footer>
+
+</body>
+</html>
